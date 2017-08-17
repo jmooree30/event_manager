@@ -9,10 +9,8 @@ def clean_phone_numbers(phone)
   cleaner = phone.to_s.scan(/\d/).join 
   if cleaner.length == 11 and cleaner[0] == 1
    cleaner
-  elsif cleaner.length > 11
-   puts "invalid entry"
   elsif cleaner.length == 10 and cleaner[0] != 1
-    cleaner.rjust(11,'1')[0..10]
+    cleaner.rjust(11,'1')
   else
    puts "invalid entry"
   end
@@ -49,11 +47,9 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   phone = clean_phone_numbers(row[:homephone])
   legislators = legislators_by_zipcode(zipcode)
-
   form_letter = erb_template.result(binding)
-
   save_thank_you_letters(id,form_letter)
-  puts "#{phone}"
-end
+end 
+
 
 
